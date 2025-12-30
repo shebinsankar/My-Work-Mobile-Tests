@@ -6,20 +6,17 @@ class PrivacyPolicyPage(BasePage):
 
     # TODO: Update with actual locators
     PRIVACY_POLICY_TITLE = (
-        AppiumBy.XPATH, "//*[contains(@text, 'Terms') or contains(@text, 'Privacy')]")
+        AppiumBy.XPATH, "ToDo")
     CHECKBOX_ACCEPT = (AppiumBy.XPATH, "//android.widget.CheckBox")
     START_IDENTIFICATION_BUTTON = (
-        AppiumBy.XPATH, "//android.widget.Button[contains(@text, 'Start Identification')]")
+        AppiumBy.XPATH, "ToDo")
 
     def is_page_loaded(self):
         return self.is_displayed(*self.PRIVACY_POLICY_TITLE, timeout=10)
 
     def check_accept_checkbox(self):
-        try:
-            if self.is_displayed(*self.CHECKBOX_ACCEPT, timeout=3):
-                self.click(*self.CHECKBOX_ACCEPT)
-        except:
-            pass
+        if self.is_displayed(*self.CHECKBOX_ACCEPT, timeout=3):
+            self.click(*self.CHECKBOX_ACCEPT)
 
     def click_start_identification(self):
         self.click(*self.START_IDENTIFICATION_BUTTON)

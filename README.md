@@ -37,41 +37,27 @@ My-Work-Mobile-Tests/
 ### 2. Installation
 
 ```powershell
-# Navigate to project directory
-cd d:\My-Projects\My-Work-Mobile-Tests
-
 # Create virtual environment
 python -m venv venv
 .\venv\Scripts\Activate.ps1
 
 # Install dependencies
 pip install -r requirements.txt
-
-# Edit .env file and set your Ident ID
-# (Already exists in project root)
 ```
 
-### 3. Configure App Details
+### 3. Configure
 
-Edit [config/config.py](config/config.py) and update:
-- `appPackage` - Your app's package name
-- `appActivity` - Your app's main activity
-- Device name and platform version
-- Path to APK file (if using local APK)
+**Edit [.env](.env) file:**
+- Set your `IDENT_ID` (generate from https://go.test.idnow.de/qaautoident/userdata)
 
-### 4. Update Element Locators
+**Edit [config/config.py](config/config.py):**
+- Update `appPackage` and `appActivity` for Android
 
-Use **Appium Inspector** to find actual element locators:
-```powershell
-npm install -g appium-inspector
-appium-inspector
-```
-
-Update locators in:
+**Update element locators** using Appium Inspector:
 - [page_objects/id_entry_page.py](page_objects/id_entry_page.py)
 - [page_objects/privacy_policy_page.py](page_objects/privacy_policy_page.py)
 
-### 5. Run Tests
+### 4. Run Tests
 
 ```powershell
 # Start Appium server (in separate terminal)
@@ -84,10 +70,24 @@ pytest tests/ -v -s
 pytest tests/ --html=reports/report.html --self-contained-html
 ```
 
-## 🔧 Key Files
+## Key Files
 
 - **[config/config.py](config/config.py)** - Appium capabilities for Android/iOS
 - **[tests/conftest.py](tests/conftest.py)** - Pytest fixtures & driver initialization
 - **[page_objects/base_page.py](page_objects/base_page.py)** - Reusable page object methods
 - **[tests/test_idnow_flow.py](tests/test_idnow_flow.py)** - Test implementation
+
+---
+
+
+### Environment & Data: How would you handle testability for flows that require camera or ID documents in a real project?
+
+
+1. Mock/Stub Backend Services: Configure test environment to accept pre-approved test document images
+2. Bypass Modes: Use feature flags or test builds that skip camera capture for automated tests
+3. Test User Pool: Maintain database of test identities with pre-uploaded documents that pass validations
+4. Image Injections: Use `driver.push_file()` to inject pre-captured test images directly into app storage
+5. Backend API Tests: Validate document processing, OCR, liveness detection via direct API calls
+6. Upload Endpoints: Post test document images directly to verification APIs
+
 
