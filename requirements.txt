@@ -1,0 +1,12 @@
+# IDnow AutoIdent - Python Dependencies
+
+# Core Appium dependencies
+Appium-Python-Client
+selenium
+
+# Test framework
+pytest
+pytest-html
+
+# Utilities
+python-dotenv
